@@ -1,10 +1,12 @@
 import importlib.util
 import pathlib
+import sys
 import unittest
 
 MODULE = pathlib.Path(__file__).parents[1] / "src" / "jwt_review.py"
 spec = importlib.util.spec_from_file_location("jwt_review", MODULE)
 jwt_review = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = jwt_review
 spec.loader.exec_module(jwt_review)
 
 
